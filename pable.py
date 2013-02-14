@@ -19,4 +19,5 @@ class Cell(object):
         self.index = options['index']
 
     def lines(self):
-        len(self.value.split('\n'))
+        self.value.split('\n')
+
