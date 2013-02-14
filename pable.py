@@ -11,6 +11,9 @@ class Row(object):
         self.cells.append(Cell(options))
         self.cell_index += 1
 
+    def height(self):
+        return max(c.count("\n") for c in self.cells) + 1
+
 
 class Cell(object):
 
@@ -19,5 +22,5 @@ class Cell(object):
         self.index = options['index']
 
     def lines(self):
-        self.value.split('\n')
+        return self.value.split('\n')
 
