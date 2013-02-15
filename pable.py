@@ -35,3 +35,18 @@ class Cell(object):
     def lines(self):
         return self.value.split('\n')
 
+
+class Separator(Row):
+    def render():
+        pass
+
+
+class Style(object):
+
+    def __init__(self):
+        self.defaults = {
+            'border_x': '-', 'border_y': '|',
+            'border_i': '+', 'padding_left': 1,
+            'padding_right': 1, 'width': None,
+            'alignment': None
+        }
