@@ -1,9 +1,13 @@
 class Table(object):
 
     def __init__(self, options):
-        self.rows = options['rows']
+        self.add_rows(options['rows'])
         self.column_widths = []
 
+    def add_rows(self, array):
+        self.rows = []
+        for r in array:
+            self.rows.append(Row(r))
 
 class Row(object):
 
