@@ -1,3 +1,10 @@
+class Table(object):
+
+    def __init__(self, options):
+        self.rows = options['rows']
+        self.column_widths = []
+
+
 class Row(object):
 
     def __init__(self, array=[]):
