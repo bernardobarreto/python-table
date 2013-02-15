@@ -19,7 +19,7 @@ class Row(object):
         self.cell_index += 1
 
     def height(self):
-        return max(c.count("\n") for c in self.cells) + 1
+        return max(str(c.value).count("\n") for c in self.cells) + 1
 
 
 class Cell(object):
