@@ -21,10 +21,10 @@ class Table(object):
         return '\n'.join(final)
 
     def cell_spacing(self):
-        self.cell_padding() + len(self.style.border_y)
+        return self.cell_padding() + len(self.style.border_y)
 
     def cell_padding(self):
-        self.style.padding_left + self.style.padding_right
+        return self.style.padding_left + self.style.padding_right
 
     def column_width(self, n):
         try: n = self.column_widths[n]
@@ -34,6 +34,7 @@ class Table(object):
     def columns_width(self):
         last = 0
         for i in self.columns_widths: last += (i + len(self.style.border_y))
+        return last
 
     def columns_number(self):
         return max(len(c.cells) for c in self.headings_with_rows())
@@ -62,12 +63,11 @@ class Row(object):
         y = self.table.style.border_y
         lines_render = []
         for line in range(self.height()):
+            cells_line_render = []
             for cell in self.cells:
-                lines_render.append(cell.render(line))
-        final = y.join(lines_render)
-        final.insert(0, y)
-        final.append(y)
-        return '\n'.join(final)
+                cells_line_render.append(cell.render(line))
+            lines_render.append(y + y.join(cells_line_render) + y)
+        return '\n'.join(lines_render)
 
 
 from re import sub
@@ -86,7 +86,8 @@ class Cell(object):
     def render(self, line=0):
         left = " " * self.table.style.padding_left
         right = " " * self.table.style.padding_right
-        line = self.lines()[line]
+        try: line = self.lines()[line]
+        except: line = ''
         #render_width = len(line) - len(self.escape(line)) + self.width()
         return "%s%s%s" % (left, line, right)
 
