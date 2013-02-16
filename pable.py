@@ -55,7 +55,13 @@ class Row(object):
     def height(self):
         return max(str(c.value).count("\n") for c in self.cells) + 1
 
+    def render(self):
+        y = self.table.style.border_y
+        for line in range(self.height()):
+            pass
 
+
+from re import sub
 class Cell(object):
 
     def __init__(self, options):
@@ -66,8 +72,20 @@ class Cell(object):
     def lines(self):
         return self.value.split('\n')
 
+    def render(self, line=0):
+        left = " " * self.table.style.padding_left
+        right = " " * self.table.style.padding_right
+        line = self.lines()[line]
+        render_width = len(line) - len(self.escape(line)) + self.width()
+
+    def escape(line):
+        line = sub(r'\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]', '', line)
+        line = sub(r'\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]', '', line)
+        return sub(r'(\x03|\x1a)/', '', line)
+
 
 class Separator(Row):
+
     def render(self):
         arr_x = []
         for i in range(self.table.columns_number()):
