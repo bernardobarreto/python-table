@@ -79,6 +79,7 @@ class Cell(object):
         right = " " * self.table.style.padding_right
         line = self.lines()[line]
         render_width = len(line) - len(self.escape(line)) + self.width()
+        return "%s%s%s" % (left, line, right)
 
     def width(self):
         padding = (self.colspan - 1) * self.table.cell_spacing
