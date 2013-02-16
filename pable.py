@@ -78,7 +78,7 @@ class Cell(object):
         line = self.lines()[line]
         render_width = len(line) - len(self.escape(line)) + self.width()
 
-    def escape(line):
+    def escape(self, line):
         line = sub(r'\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]', '', line)
         line = sub(r'\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]', '', line)
         return sub(r'(\x03|\x1a)/', '', line)
