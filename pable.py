@@ -68,6 +68,8 @@ class Cell(object):
         self.value = options['value']
         self.index = options['index']
         self.table = options['table']
+        self.colspan = 1
+        self.width = len(self.value)
 
     def lines(self):
         return self.value.split('\n')
@@ -77,6 +79,13 @@ class Cell(object):
         right = " " * self.table.style.padding_right
         line = self.lines()[line]
         render_width = len(line) - len(self.escape(line)) + self.width()
+
+    def width(self):
+        padding = (self.colspan - 1) * self.table.cell_spacing
+        inner_width = 0
+        for i in range(1, self.colspan+1):
+            inner_width += self.table.column_width(self.index + i -1)
+        return inner_width + padding
 
     def escape(self, line):
         line = sub(r'\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]', '', line)
