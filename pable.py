@@ -15,7 +15,10 @@ class Table(object):
         buffer = self.rows
         buffer.insert(0, separator)
         buffer.append(separator)
-        import pdb; pdb.set_trace()
+        final = []
+        for r in buffer:
+            final.append(r.render())
+        return '\n'.join(final)
 
     def cell_spacing(self):
         self.cell_padding() + len(self.style.border_y)
@@ -57,8 +60,14 @@ class Row(object):
 
     def render(self):
         y = self.table.style.border_y
+        lines_render = []
         for line in range(self.height()):
-            pass
+            for cell in self.cells:
+                lines_render.append(cell.render(line))
+        final = y.join(lines_render)
+        final.insert(0, y)
+        final.append(y)
+        return '\n'.join(final)
 
 
 from re import sub
@@ -78,7 +87,7 @@ class Cell(object):
         left = " " * self.table.style.padding_left
         right = " " * self.table.style.padding_right
         line = self.lines()[line]
-        render_width = len(line) - len(self.escape(line)) + self.width()
+        #render_width = len(line) - len(self.escape(line)) + self.width()
         return "%s%s%s" % (left, line, right)
 
     def width(self):
