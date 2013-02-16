@@ -73,10 +73,10 @@ class Row(object):
 from re import sub
 class Cell(object):
 
-    def __init__(self, options):
-        self.value = options['value']
-        self.index = options['index']
-        self.table = options['table']
+    def __init__(self, **kwargs):
+        self.value = kwargs['value']
+        self.index = kwargs['index']
+        self.table = kwargs['table']
         self.colspan = 1
         self.width = len(self.value)
 
