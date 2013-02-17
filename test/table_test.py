@@ -4,7 +4,7 @@ from pable import Table, Row, Cell, Separator, Style
 
 class CellTest(unittest.TestCase):
 
-    def test_create_cell(self):
+    def test_create(self):
         table = Table([['a']])
         cell = Cell({ 'value': 'v', 'index': 0, 'table': table })
         self.assertEqual(cell.value, 'v')
@@ -12,6 +12,11 @@ class CellTest(unittest.TestCase):
         self.assertEqual(cell.table, table)
         self.assertEqual(cell.colspan, 1)
         self.assertEqual(cell.width, 1)
+
+    def test_render(self):
+        table = Table([['a']])
+        cell = Cell({ 'value': 'v', 'index': 0, 'table': table })
+        self.assertEqual(cell.render(), ' v ')
 
 
 class SeparatorTest(unittest.TestCase):
