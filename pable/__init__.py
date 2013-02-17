@@ -1,35 +1,22 @@
 class Table(object):
 
     def __init__(self, rows):
-        #self.add_rows(rows)
-        self.rows = rows
-        self.column_widths = []
+        self.add_rows(rows)
+        self.rows_values = rows
         self.style = Style()
 
     def add_rows(self, array):
         self.rows = []
-        for r in array:
-            self.rows.append(Row(table=self, array=r))
+        for r in array: self.rows.append(Row(table=self, array=r))
 
     def render(self):
-        widths = [ len(max(columns, key=lambda item: len(item))) for columns in zip(*self.rows) ]
-        out = '+-' + '-+-'.join( '-' * width for width in widths ) + '-+\n'
+        self.columns_widths = [
+            len(max(columns, key=lambda item: len(item))) for columns in zip(*self.rows_values)]
+        out = '+-' + '-+-'.join( '-' * width for width in self.columns_widths ) + '-+\n'
         for row in self.rows:
-            out += '| '
-            out += " | ".join( format(cdata, "%ds" % width) for width, cdata in zip(widths, row) )
-            out += ' |\n'
-        out += '+-' + '-+-'.join( '-' * width for width in widths ) + '-+'
+            out += row.render()
+        out += '+-' + '-+-'.join( '-' * width for width in self.columns_widths ) + '-+'
         print out
-
-    #def render(self):
-    #    separator = Separator(table=self)
-    #    buffer = self.rows
-    #    buffer.insert(0, separator)
-    #    buffer.append(separator)
-    #    final = []
-    #    for r in buffer:
-    #        final.append(r.render())
-    #    return '\n'.join(final)
 
     def cell_spacing(self):
         return self.cell_padding() + len(self.style.border_y)
@@ -60,6 +47,7 @@ class Row(object):
         self.table = table
         self.cell_index = 0
         self.cells = []
+        self.cells_values = array
         for item in array: self.add_cell(item)
 
     def add_cell(self, item):
@@ -72,13 +60,11 @@ class Row(object):
 
     def render(self):
         y = self.table.style.border_y
-        lines_render = []
-        for line in range(self.height()):
-            cells_line_render = []
-            for cell in self.cells:
-                cells_line_render.append(cell.render(line))
-            lines_render.append(y + y.join(cells_line_render) + y)
-        return '\n'.join(lines_render)
+        out = '%s ' % y
+        out += (" %s " % y).join(
+                format(cell.value, "%ds" % width) for width, cell in zip(self.table.columns_widths, self.cells)
+               )
+        return out + ' %s\n' % y
 
 
 from re import sub
@@ -89,7 +75,6 @@ class Cell(object):
         self.index = options['index']
         self.table = options['table']
         self.colspan = 1
-        #self._width = len(self.value)
 
     def lines(self):
         return self.value.split('\n')
