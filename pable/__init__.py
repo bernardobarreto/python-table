@@ -123,6 +123,6 @@ class Style(object):
         self.border_i = '+'
         self.padding_left = 1
         self.padding_right = 1
-        self.width = None,
+        self.width = None
         self.alignment = None
 
