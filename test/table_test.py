@@ -2,6 +2,18 @@ import unittest
 from pable import Table, Row, Cell, Separator, Style
 
 
+class CellTest(unittest.TestCase):
+
+    def test_create_cell(self):
+        table = Table([['a']])
+        cell = Cell({ 'value': 'v', 'index': 0, 'table': table })
+        self.assertEqual(cell.value, 'v')
+        self.assertEqual(cell.index, 0)
+        self.assertEqual(cell.table, table)
+        self.assertEqual(cell.colspan, 1)
+        self.assertEqual(cell.width, 1)
+
+
 class SeparatorTest(unittest.TestCase):
 
     def test_separator_render(self):
