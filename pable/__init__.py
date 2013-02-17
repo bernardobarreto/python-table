@@ -60,11 +60,11 @@ class Row(object):
 
     def render(self):
         y = self.table.style.border_y
-        out = '%s ' % y
-        out += (" %s " % y).join(
-                format(cell.value, "%ds" % width) for width, cell in zip(self.table.columns_widths, self.cells)
+        out = '%s' % y
+        out += ("%s" % y).join(
+                [cell.render() for cell in self.cells]
                )
-        return out + ' %s\n' % y
+        return out + '%s\n' % y
 
 
 from re import sub
@@ -73,7 +73,7 @@ class Cell(object):
     def __init__(self, options):
         self.value = options['value']
         self.index = options['index']
-        self.table = options['table']
+        self.table = options['table'] #TODO: row, not table
         self.colspan = 1
 
     def lines(self):
@@ -82,12 +82,9 @@ class Cell(object):
     def render(self, line=0):
         left = " " * self.table.style.padding_left
         right = " " * self.table.style.padding_right
-        try: line = self.lines()[line]
-        except: line = ''
-        render_width = len(line) - len(self.escape(line)) + self.width()
-        out =  "%s%s%s" % (left, line, right)
-        import ipdb; ipdb.set_trace()
-        return format(out, "ds" % render_width)
+        out = format(self.value, "%ds" % self.table.columns_widths[self.index])
+        return "{left}{out}{right}".format(left=left, out=out, right=right)
+        #render_width = len(line) - len(self.escape(line)) + self.width()
 
     def width(self):
         padding = (self.colspan - 1) * self.table.cell_spacing()
