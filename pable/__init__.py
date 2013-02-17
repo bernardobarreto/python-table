@@ -1,7 +1,7 @@
 class Table(object):
 
-    def __init__(self, **options):
-        self.add_rows(options['rows'])
+    def __init__(self, rows):
+        self.add_rows(rows)
         self.column_widths = []
         self.style = Style()
 
@@ -73,7 +73,7 @@ class Row(object):
 from re import sub
 class Cell(object):
 
-    def __init__(self, **options):
+    def __init__(self, options):
         self.value = options['value']
         self.index = options['index']
         self.table = options['table']
