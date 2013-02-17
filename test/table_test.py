@@ -2,6 +2,14 @@ import unittest
 from pable import Table, Row, Cell, Separator, Style
 
 
+class SeparatorTest(unittest.TestCase):
+
+    def test_separator_render(self):
+        table = Table([['a', 'b']])
+        render = Separator(table).render()
+        self.assertEqual(render, '+--+--+')
+
+
 class StyleTest(unittest.TestCase):
 
     def test_create_new_style(self):
