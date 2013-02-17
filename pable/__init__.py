@@ -9,13 +9,16 @@ class Table(object):
         self.rows = []
         for r in array: self.rows.append(Row(table=self, array=r))
 
+    @property
+    def columns_widths(self):
+        return [len(max(columns, key=lambda item: len(item))) for columns in zip(*self.rows_values)]
+
     def render(self):
-        self.columns_widths = [
-            len(max(columns, key=lambda item: len(item))) for columns in zip(*self.rows_values)]
-        out = '+-' + '-+-'.join( '-' * width for width in self.columns_widths ) + '-+\n'
+        columns_widths = self.columns_widths
+        out = '+-' + '-+-'.join( '-' * width for width in columns_widths ) + '-+\n'
         for row in self.rows:
             out += row.render()
-        out += '+-' + '-+-'.join( '-' * width for width in self.columns_widths ) + '-+'
+        out += '+-' + '-+-'.join( '-' * width for width in columns_widths ) + '-+'
         print out
 
     def cell_spacing(self):
