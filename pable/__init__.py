@@ -84,15 +84,14 @@ class Separator(Row):
 
 
 class Style(object):
-    #TODO: pass args as hash, find something like ruby's:
-    # hash.fetch(:foo, 'value when :foo wasnt found')
 
-    def __init__(self):
-        self.border_x = '-'
-        self.border_y = '|'
-        self.border_i = '+'
-        self.padding_left = 1
-        self.padding_right = 1
-        self.width = None
-        self.alignment = None
+    def __init__(self, border_x='-', border_y='|', border_i='+',
+                padding_right=1, padding_left=1, width=None, alignment=None):
+        self.border_x = border_x
+        self.border_y = border_y
+        self.border_i = border_i
+        self.padding_left = padding_left
+        self.padding_right = padding_right
+        self.width = width
+        self.alignment = alignment
 
