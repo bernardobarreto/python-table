@@ -10,8 +10,6 @@ class CellTest(unittest.TestCase):
         self.assertEqual(cell.value, 'v')
         self.assertEqual(cell.index, 0)
         self.assertEqual(cell.table, table)
-        self.assertEqual(cell.colspan, 1)
-        self.assertEqual(cell.width, 1)
 
     def test_render(self):
         table = Table([['a']])
