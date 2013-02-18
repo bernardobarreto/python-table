@@ -10,7 +10,7 @@ class Table(object):
         for r in array: self.rows.append(Row(table=self, array=r))
 
     @property
-    def columns_widths(self):
+    def max_columns_widths(self):
         return [len(max(columns, key=lambda item: len(item))) for columns in zip(*self.rows_values)]
 
     def render(self):
@@ -27,22 +27,6 @@ class Table(object):
     def cell_padding(self):
         return self.style.padding_left + self.style.padding_right
 
-    def column_width(self, n):
-        try: n = self.column_widths[n]
-        except: n = 0
-        return n
-
-    def columns_width(self):
-        last = 0
-        for i in self.columns_widths: last += (i + len(self.style.border_y))
-        return last
-
-    def columns_number(self):
-        return max(len(c.cells) for c in self.headings_with_rows())
-
-    def headings_with_rows(self):
-        return self.rows #TODO: headings
-
 
 class Row(object):
 
@@ -58,8 +42,8 @@ class Row(object):
         self.cells.append(Cell(options))
         self.cell_index += 1
 
-    def height(self):
-        return max(str(c.value).count("\n") for c in self.cells) + 1
+    #def height(self):
+    #    return max(str(c.value).count("\n") for c in self.cells) + 1
 
     def render(self):
         y = self.table.style.border_y
@@ -70,36 +54,18 @@ class Row(object):
         return (out + '%s\n' % y)
 
 
-from re import sub
 class Cell(object):
 
     def __init__(self, options):
         self.value = options['value']
         self.index = options['index']
         self.table = options['table'] #TODO: row, not table
-        self.colspan = 1
-
-    def lines(self):
-        return self.value.split('\n')
 
     def render(self, line=0):
         left = " " * self.table.style.padding_left
         right = " " * self.table.style.padding_right
-        out = format(self.value, "%ds" % self.table.columns_widths[self.index])
+        out = format(self.value, "%ds" % self.table.max_columns_widths[self.index])
         return "{left}{out}{right}".format(left=left, out=out, right=right)
-        #render_width = len(line) - len(self.escape(line)) + self.width()
-
-    def width(self):
-        padding = (self.colspan - 1) * self.table.cell_spacing()
-        inner_width = 0
-        for i in range(1, self.colspan+1):
-            inner_width += self.table.column_width(self.index + i -1)
-        return inner_width + padding
-
-    def escape(self, line):
-        line = sub(r'\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]', '', line)
-        line = sub(r'\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]', '', line)
-        return sub(r'(\x03|\x1a)/', '', line)
 
 
 class Separator(Row):
@@ -117,7 +83,7 @@ class Separator(Row):
         return (
                 ('%s%s' % (s.border_i, s.border_x)) +
                 ('%s%s%s' % (s.border_x, s.border_i, s.border_x))
-                .join( s.border_x * width for width in t.columns_widths )
+                .join( s.border_x * width for width in t.max_columns_widths )
                 + '%s%s%s' % (s.border_x, s.border_i, n)
                )
 
