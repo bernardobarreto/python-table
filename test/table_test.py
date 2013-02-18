@@ -21,10 +21,15 @@ class CellTest(unittest.TestCase):
 
 class SeparatorTest(unittest.TestCase):
 
-    def test_separator_render(self):
+    def test_separator_render_up(self):
         table = Table([['a', 'b']])
-        render = Separator(table).render()
-        self.assertEqual(render, '+--+--+')
+        render = Separator(table).render_up()
+        self.assertEqual(render, '+---+---+\n')
+
+    def test_separator_render_down(self):
+        table = Table([['a', 'b']])
+        render = Separator(table).render_down()
+        self.assertEqual(render, '+---+---+')
 
 
 class StyleTest(unittest.TestCase):
