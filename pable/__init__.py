@@ -45,9 +45,7 @@ class Row(object):
     def render(self):
         y = self.table.style.border_y
         out = '%s' % y
-        out += ("%s" % y).join(
-                [cell.render() for cell in self.cells]
-               )
+        out += ("%s" % y).join( [cell.render() for cell in self.cells] )
         return (out + '%s\n' % y)
 
 
