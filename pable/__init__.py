@@ -14,11 +14,11 @@ class Table(object):
         return [len(max(columns, key=lambda item: len(item))) for columns in zip(*self.rows_values)]
 
     def render(self):
-        columns_widths = self.columns_widths
-        out = '+-' + '-+-'.join( '-' * width for width in columns_widths ) + '-+\n'
+        s = Separator(self)
+        out = s.render_up()
         for row in self.rows:
             out += row.render()
-        out += '+-' + '-+-'.join( '-' * width for width in columns_widths ) + '-+'
+        out += s.render_down()
         print out
 
     def cell_spacing(self):
@@ -67,7 +67,7 @@ class Row(object):
         out += ("%s" % y).join(
                 [cell.render() for cell in self.cells]
                )
-        return out + '%s\n' % y
+        return (out + '%s\n' % y)
 
 
 from re import sub
@@ -104,13 +104,22 @@ class Cell(object):
 
 class Separator(Row):
 
-    def render(self):
-        arr_x = []
-        for i in range(self.table.columns_number()):
-            arr_x.append(self.table.style.border_x * (self.table.column_width(i)
-                + self.table.cell_padding()))
-        border_i = self.table.style.border_i
-        return border_i + border_i.join(arr_x) + border_i
+    def render_up(self):
+        return self.render(up=True)
+
+    def render_down(self):
+        return self.render(up=False)
+
+    def render(self, up):
+        t = self.table
+        s = t.style
+        n = '\n' if up else ''
+        return (
+                ('%s%s' % (s.border_i, s.border_x)) +
+                ('%s%s%s' % (s.border_x, s.border_i, s.border_x))
+                .join( s.border_x * width for width in t.columns_widths )
+                + '%s%s%s' % (s.border_x, s.border_i, n)
+               )
 
 
 class Style(object):
