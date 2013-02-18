@@ -19,7 +19,7 @@ class Table(object):
         for row in self.rows:
             out += row.render()
         out += s.render_down()
-        print out
+        print out #FIXME: print or return ?
 
     def cell_spacing(self):
         return self.cell_padding() + len(self.style.border_y)
@@ -84,6 +84,8 @@ class Separator(Row):
 
 
 class Style(object):
+    #TODO: pass args as hash, find something like ruby's:
+    # hash.fetch(:foo, 'value when :foo wasnt found')
 
     def __init__(self):
         self.border_x = '-'
