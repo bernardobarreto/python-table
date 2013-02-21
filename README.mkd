@@ -4,3 +4,17 @@ Create terminal tables with python.
 
 Usage
 -----
+```
+from Pable import Table
+# To generate a table, provide an array of arrays (which are interpreted as rows):
+rows = []
+rows.append(['One', '1'])
+rows.append(['One', '1'])
+rows.append(['One', '1'])
+rows.render()
+  # +-------+---+
+  # | One   | 1 |
+  # | Two   | 2 |
+  # | Three | 3 |
+  # +-------+---+
+```
