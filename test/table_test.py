@@ -2,6 +2,15 @@ import unittest
 from pable import Table, Row, Cell, Separator, Style
 
 
+class RowTest(unittest.TestCase):
+
+    def test_create(self):
+        table = Table([['a']])
+        row = Row(table, table.rows_values[0])
+        self.assertEqual(row.table, table)
+        self.assertEqual(row.cell_index, 1)
+        self.assertEqual(row.cells_values, ['a'])
+
 class CellTest(unittest.TestCase):
 
     def test_create(self):

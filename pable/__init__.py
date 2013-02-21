@@ -33,11 +33,11 @@ class Row(object):
     def __init__(self, table, array=[]):
         self.table = table
         self.cell_index = 0
-        self.cells = []
         self.cells_values = array
         for item in array: self.add_cell(item)
 
     def add_cell(self, item):
+        self.cells = []
         options = { 'value': item, 'index': self.cell_index, 'table': self.table }
         self.cells.append(Cell(options))
         self.cell_index += 1
