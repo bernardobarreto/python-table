@@ -2,6 +2,11 @@ Pable
 =====
 Create terminal tables with python.
 
+Install
+-------
+not on pypi yet, so:
+`[sudo] python setup.py install`
+
 Usage
 -----
 ```
