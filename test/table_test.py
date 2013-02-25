@@ -9,7 +9,6 @@ class TableTest(unittest.TestCase):
 | one | 1 |
 | two | 2 |
 +-----+---+"""
-
         self.assertEqual(t.render(), out)
 
 
@@ -31,6 +30,11 @@ class RowTest(unittest.TestCase):
         self.assertEqual(cell.value, 'foo')
         self.assertEqual(cell.index, 1)
         self.assertEqual(cell.table, row.table)
+
+    def test_render(self):
+        row = Table([['one', '1']]).rows[0]
+        self.assertEqual(row.render(), '| one | 1 |\n')
+
 
 class CellTest(unittest.TestCase):
 
