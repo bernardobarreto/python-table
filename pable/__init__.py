@@ -34,10 +34,10 @@ class Row(object):
         self.table = table
         self.cell_index = 0
         self.cells_values = array
+        self.cells = []
         for item in array: self.add_cell(item)
 
     def add_cell(self, item):
-        self.cells = []
         options = { 'value': item, 'index': self.cell_index, 'table': self.table }
         self.cells.append(Cell(options))
         self.cell_index += 1
