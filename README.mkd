@@ -16,10 +16,10 @@ rows = []
 rows.append(['One', '1'])
 rows.append(['One', '1'])
 rows.append(['One', '1'])
-rows.render()
-  # +-------+---+
-  # | One   | 1 |
-  # | Two   | 2 |
-  # | Three | 3 |
-  # +-------+---+
+print rows.render()
++-------+---+
+| One   | 1 |
+| Two   | 2 |
+| Three | 3 |
++-------+---+
 ```

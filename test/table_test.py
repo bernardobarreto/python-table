@@ -1,6 +1,17 @@
 import unittest
 from pable import Table, Row, Cell, Separator, Style
 
+class TableTest(unittest.TestCase):
+
+    def test_render(self):
+        t = Table([['one', '1'], ['two', '2']])
+        out = """+-----+---+
+| one | 1 |
+| two | 2 |
++-----+---+"""
+
+        self.assertEqual(t.render(), out)
+
 
 class RowTest(unittest.TestCase):
 
@@ -14,9 +25,9 @@ class RowTest(unittest.TestCase):
     def test_add_cell(self):
         row = Table([['a']]).rows[0]
         row.add_cell('foo')
-        cell = row.cells[0]
+        cell = row.cells[1]
         self.assertEqual(row.cell_index, 2)
-        self.assertEqual(len(row.cells), 1)
+        self.assertEqual(len(row.cells), 2)
         self.assertEqual(cell.value, 'foo')
         self.assertEqual(cell.index, 1)
         self.assertEqual(cell.table, row.table)

@@ -18,8 +18,7 @@ class Table(object):
         out = s.render_up()
         for row in self.rows:
             out += row.render()
-        out += s.render_down()
-        print out #FIXME: print or return ?
+        return out + s.render_down()
 
     def cell_spacing(self):
         return self.cell_padding() + len(self.style.border_y)
