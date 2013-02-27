@@ -11,6 +11,10 @@ class TableTest(unittest.TestCase):
 +-----+---+"""
         self.assertEqual(t.render(), out)
 
+    def test_max_columns_widths(self):
+        t = Table([['one', '1'], ['two', '2']])
+        self.assertEqual(t.max_columns_widths, [3, 1])
+
 
 class RowTest(unittest.TestCase):
 
