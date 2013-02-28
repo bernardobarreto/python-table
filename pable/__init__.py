@@ -20,9 +20,11 @@ class Table(object):
             out += row.render()
         return out + s.render_down()
 
+    @property
     def cell_spacing(self):
-        return self.cell_padding() + len(self.style.border_y)
+        return self.cell_padding + len(self.style.border_y)
 
+    @property
     def cell_padding(self):
         return self.style.padding_left + self.style.padding_right
 

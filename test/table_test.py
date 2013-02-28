@@ -15,6 +15,14 @@ class TableTest(unittest.TestCase):
         t = Table([['one', '1'], ['two', '2']])
         self.assertEqual(t.max_columns_widths, [3, 1])
 
+    def test_cell_spacing(self):
+        t = Table([['one', '1'], ['two', '2']])
+        self.assertEqual(t.cell_spacing, 3)
+
+    def test_cell_padding(self):
+        t = Table([['one', '1'], ['two', '2']])
+        self.assertEqual(t.cell_spacing, 3)
+
 
 class RowTest(unittest.TestCase):
 
