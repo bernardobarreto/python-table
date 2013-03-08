@@ -1,7 +1,6 @@
 Pable
 =====
 Create terminal tables with python.
-Ruby option: visionmedia/terminal-table
 
 Install
 -------
