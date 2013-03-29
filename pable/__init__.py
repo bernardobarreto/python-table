@@ -1,8 +1,8 @@
 class Table(object):
 
     def __init__(self, rows):
-        self.add_rows(rows)
-        self.rows_values = rows
+        self.rows_values = [[str(value) for value in row] for row in rows]
+        self.add_rows(self.rows_values)
         self.style = Style()
 
     def add_rows(self, array):
