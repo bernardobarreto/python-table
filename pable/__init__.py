@@ -1,14 +1,7 @@
 class Table(object):
 
     def __init__(self, rows):
-        rows_str = []
-        for row in rows:
-            row_str = []
-            for cell in row:
-                row_str.append(str(cell))
-            rows_str.append(row_str)
-        rows = rows_str
-
+        rows = self.values_to_str(rows)
         self.add_rows(rows)
         self.rows_values = rows
         self.style = Style()
@@ -16,6 +9,15 @@ class Table(object):
     def add_rows(self, array):
         self.rows = []
         for r in array: self.rows.append(Row(table=self, array=r))
+
+    def values_to_str(self, rows):
+        rows_str = []
+        for row in rows:
+            row_str = []
+            for cell in row:
+                row_str.append(str(cell))
+            rows_str.append(row_str)
+        return rows_str
 
     @property
     def max_columns_widths(self):
