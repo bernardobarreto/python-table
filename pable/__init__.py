@@ -1,6 +1,14 @@
 class Table(object):
 
     def __init__(self, rows):
+        rows_str = []
+        for row in rows:
+            row_str = []
+            for cell in row:
+                row_str.append(str(cell))
+            rows_str.append(row_str)
+        rows = rows_str
+
         self.add_rows(rows)
         self.rows_values = rows
         self.style = Style()

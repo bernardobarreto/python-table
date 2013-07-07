@@ -11,6 +11,14 @@ class TableTest(unittest.TestCase):
 +-----+---+"""
         self.assertEqual(t.render(), out)
 
+    def test_accepts_differents_types_of_cell_values(self):
+        t = Table([['one', 1], ['two', 1.2]])
+        out = """+-----+-----+
+| one | 1   |
+| two | 1.2 |
++-----+-----+"""
+        self.assertEqual(t.render(), out)
+
     def test_max_columns_widths(self):
         t = Table([['one', '1'], ['two', '2']])
         self.assertEqual(t.max_columns_widths, [3, 1])
