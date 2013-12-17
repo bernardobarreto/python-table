@@ -61,14 +61,14 @@ class CellTest(unittest.TestCase):
 
     def test_create(self):
         table = Table([['a']])
-        cell = Cell({ 'value': 'v', 'index': 0, 'table': table })
+        cell = Cell(value='v', index=0, table=table)
         self.assertEqual(cell.value, 'v')
         self.assertEqual(cell.index, 0)
         self.assertEqual(cell.table, table)
 
     def test_render(self):
         table = Table([['a']])
-        cell = Cell({ 'value': 'v', 'index': 0, 'table': table })
+        cell = Cell(value='v', index=0, table=table)
         self.assertEqual(cell.render(), ' v ')
 
 

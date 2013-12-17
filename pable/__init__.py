@@ -48,8 +48,7 @@ class Row(object):
         for item in array: self.add_cell(item)
 
     def add_cell(self, item):
-        options = { 'value': item, 'index': self.cell_index, 'table': self.table }
-        self.cells.append(Cell(options))
+        self.cells.append(Cell(item, self.cell_index, self.table))
         self.cell_index += 1
 
     def render(self):
@@ -61,10 +60,10 @@ class Row(object):
 
 class Cell(object):
 
-    def __init__(self, options):
-        self.value = options['value']
-        self.index = options['index']
-        self.table = options['table'] #TODO: row, not table
+    def __init__(self, value, index, table):
+        self.value = value
+        self.index = index
+        self.table = table #TODO: row, not table
 
     def render(self, line=0):
         left = " " * self.table.style.padding_left
