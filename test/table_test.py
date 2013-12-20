@@ -1,5 +1,5 @@
 import unittest
-from pable import Table, Row, Cell, Separator, Style
+from pable import Table, Row, Cell, Separator, Style, InvalidOptionError
 
 class TableTest(unittest.TestCase):
 
@@ -75,6 +75,15 @@ class CellTest(unittest.TestCase):
         table = Table([['a']])
         cell = Cell(value='v', index=0, table=table)
         self.assertEqual(cell.alignment, 'left')
+
+    def test_only_accepts_some_options_for_alignment(self):
+        table = Table([['a']])
+        cell = Cell(value='v', index=0, table=table)
+        cell.alignment = 'left'
+        cell.alignment = 'center'
+        cell.alignment = 'right'
+        def foo(): cell.alignment = 'foo'
+        self.assertRaises(InvalidOptionError, foo)
 
 
 class SeparatorTest(unittest.TestCase):

@@ -64,7 +64,17 @@ class Cell(object):
         self.value = value
         self.index = index
         self.table = table #TODO: row, not table
-        self.alignment = 'left'
+        self._alignment = 'left'
+
+    @property
+    def alignment(self):
+        return self._alignment
+
+    @alignment.setter
+    def alignment(self, option):
+        if not (option in ['left', 'center', 'right']):
+            raise InvalidOptionError
+        self._alignment = option
 
     def render(self, line=0):
         left = " " * self.table.style.padding_left
@@ -104,4 +114,8 @@ class Style(object):
         self.padding_right = padding_right
         self.width = width
         self.alignment = alignment
+
+
+class InvalidOptionError(Exception):
+    pass
 
