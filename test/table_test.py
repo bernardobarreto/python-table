@@ -71,6 +71,11 @@ class CellTest(unittest.TestCase):
         cell = Cell(value='v', index=0, table=table)
         self.assertEqual(cell.render(), ' v ')
 
+    def test_default_alignment_left(self):
+        table = Table([['a']])
+        cell = Cell(value='v', index=0, table=table)
+        self.assertEqual(cell.alignment, 'left')
+
 
 class SeparatorTest(unittest.TestCase):
 

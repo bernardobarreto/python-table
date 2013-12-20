@@ -64,6 +64,7 @@ class Cell(object):
         self.value = value
         self.index = index
         self.table = table #TODO: row, not table
+        self.alignment = 'left'
 
     def render(self, line=0):
         left = " " * self.table.style.padding_left
