@@ -85,6 +85,12 @@ class CellTest(unittest.TestCase):
         def foo(): cell.alignment = 'foo'
         self.assertRaises(InvalidOptionError, foo)
 
+    def test_lines(self):
+        table = Table([['a\nfoobar']])
+        cell = table.rows[0].cells[0]
+        self.assertEqual(cell.lines[0], 'a')
+        self.assertEqual(cell.lines[1], 'foobar')
+
     def test_allow_multiline_content(self):
         table = Table([['a\nfoobar']])
         cell = table.rows[0].cells[0]
