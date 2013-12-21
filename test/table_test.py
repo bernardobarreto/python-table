@@ -85,6 +85,12 @@ class CellTest(unittest.TestCase):
         def foo(): cell.alignment = 'foo'
         self.assertRaises(InvalidOptionError, foo)
 
+    def test_allow_multiline_content(self):
+        table = Table([['a\nfoobar']])
+        cell = table.rows[0].cells[0]
+        self.assertEqual(cell.value, 'a\nfoobar')
+        self.assertEqual(cell.value_for_column_width_recalc(), 'foobar')
+
 
 class SeparatorTest(unittest.TestCase):
 

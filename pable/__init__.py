@@ -68,7 +68,10 @@ class Cell(object):
 
     @property
     def lines(self):
-        self.value.split('\n')
+        return self.value.split('\n')
+
+    def value_for_column_width_recalc(self):
+        return max(self.lines)
 
     @property
     def alignment(self):
