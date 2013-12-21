@@ -63,8 +63,12 @@ class Cell(object):
     def __init__(self, value, index, table):
         self.value = value
         self.index = index
-        self.table = table #TODO: row, not table
+        self.table = table
         self._alignment = 'left'
+
+    @property
+    def lines(self):
+        self.value.split('\n')
 
     @property
     def alignment(self):
