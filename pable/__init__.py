@@ -79,7 +79,7 @@ class Cell(object):
 
     @alignment.setter
     def alignment(self, option):
-        if not (option in ['left', 'center', 'right']):
+        if option not in ['left', 'center', 'right']:
             raise InvalidOptionError
         self._alignment = option
 
