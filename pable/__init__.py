@@ -1,7 +1,7 @@
 class Table(object):
 
     def __init__(self, rows):
-        self.rows_values = [[str(value) for value in row] for row in rows]
+        self.rows_values = [[str(value) for value in row] for row in rows] # convert to str
         self.add_rows(self.rows_values)
         self.style = Style()
 
@@ -20,6 +20,7 @@ class Table(object):
 
     @property
     def max_columns_widths(self):
+        #TODO: split (\n)
         return [len(max(columns, key=lambda item: len(item))) for columns in zip(*self.rows_values)]
 
     def render(self):
@@ -86,7 +87,7 @@ class Cell(object):
     def render(self, line=0):
         left = " " * self.table.style.padding_left
         right = " " * self.table.style.padding_right
-        out = format(self.value, "%ds" % self.table.max_columns_widths[self.index])
+        out = format(self.lines[line], "%ds" % self.table.max_columns_widths[self.index])
         return "{left}{out}{right}".format(left=left, out=out, right=right)
 
 

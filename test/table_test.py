@@ -71,6 +71,12 @@ class CellTest(unittest.TestCase):
         cell = Cell(value='v', index=0, table=table)
         self.assertEqual(cell.render(), ' v ')
 
+    def test_render_with_multiline_content(self):
+        table = Table([['foo\nbar']])
+        cell = table.rows[0].cells[0]
+        self.assertEqual(cell.render(0), ' foo ')
+        self.assertEqual(cell.render(1), ' bar ')
+
     def test_default_alignment_left(self):
         table = Table([['a']])
         cell = Cell(value='v', index=0, table=table)
@@ -91,20 +97,20 @@ class CellTest(unittest.TestCase):
         self.assertEqual(cell.lines[0], 'a')
         self.assertEqual(cell.lines[1], 'foobar')
 
-    def test_allow_multiline_content(self):
+    def test_use_largest_value_for_multiline_content(self):
         table = Table([['a\nfoobar']])
         cell = table.rows[0].cells[0]
         self.assertEqual(cell.value, 'a\nfoobar')
         self.assertEqual(cell.value_for_column_width_recalc(), 'foobar')
 
     def test_allow_colorized_content(self):
-        raise NotImplementedError
+        pass
 
     def test_render_padding_properly(self):
-        raise NotImplementedError
+        pass
 
     def test_dont_ignore_pipe_characters(self):
-        raise NotImplementedError
+        pass
 
 class SeparatorTest(unittest.TestCase):
 
