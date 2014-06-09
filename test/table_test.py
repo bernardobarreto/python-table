@@ -123,3 +123,5 @@ class StyleTest(unittest.TestCase):
         self.assertEqual(style.width, None)
         self.assertEqual(style.alignment, None)
 
+if __name__ == '__main__':
+    unittest.main()
