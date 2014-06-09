@@ -97,6 +97,14 @@ class CellTest(unittest.TestCase):
         self.assertEqual(cell.value, 'a\nfoobar')
         self.assertEqual(cell.value_for_column_width_recalc(), 'foobar')
 
+    def test_allow_colorized_content(self):
+        raise NotImplementedError
+
+    def test_render_padding_properly(self):
+        raise NotImplementedError
+
+    def test_dont_ignore_pipe_characters(self):
+        raise NotImplementedError
 
 class SeparatorTest(unittest.TestCase):
 
