@@ -21,6 +21,17 @@ class Table(object):
     def column(self, n):
         return [row[n] for row in self.rows_values]
 
+    def columns(self):
+        return []
+
+    def number_of_columns(self):
+        bigger = 0
+        for row in self.rows:
+            len_cells = len(row.cells)
+            if len_cells > bigger:
+              bigger = len_cells
+        return bigger
+
     @property
     def max_columns_widths(self):
         splited = []
