@@ -20,8 +20,13 @@ class Table(object):
 
     @property
     def max_columns_widths(self):
-        #TODO: split (\n)
-        return [len(max(columns, key=lambda item: len(item))) for columns in zip(*self.rows_values)]
+        splited = []
+        for i in self.rows_values:
+            array = []
+            for j in i:
+                array.append(max(j.split('\n')))
+            splited.append(array)
+        return [len(max(columns, key=lambda item: len(item))) for columns in zip(*splited)]
 
     def render(self):
         s = Separator(self)
