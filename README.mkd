@@ -13,8 +13,8 @@ from Pable import Table
 # To generate a table, provide an array of arrays (which are interpreted as rows):
 rows = []
 rows.append(['One', '1'])
-rows.append(['One', '1'])
-rows.append(['One', '1'])
+rows.append(['One', '2'])
+rows.append(['One', '3'])
 print rows.render()
 +-------+---+
 | One   | 1 |
