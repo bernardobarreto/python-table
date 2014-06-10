@@ -22,7 +22,10 @@ class Table(object):
         return [row[n] for row in self.rows_values]
 
     def columns(self):
-        return []
+        result = []
+        for i in range(self.number_of_columns()):
+            result.append(self.column(i))
+        return result
 
     def number_of_columns(self):
         bigger = 0
