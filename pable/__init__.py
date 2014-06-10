@@ -18,6 +18,9 @@ class Table(object):
             rows_str.append(row_str)
         return rows_str
 
+    def column(self, n):
+        return [row[n] for row in self.rows_values]
+
     @property
     def max_columns_widths(self):
         splited = []

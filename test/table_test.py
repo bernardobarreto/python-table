@@ -3,6 +3,10 @@ from pable import Table, Row, Cell, Separator, Style, InvalidOptionError
 
 class TableTest(unittest.TestCase):
 
+    def test_select_column(self):
+        t = Table([['one', '1'], ['two', '2']])
+        self.assertEqual(t.column(1), ['1', '2'])
+
     def test_render(self):
         t = Table([['one', '1'], ['two', '2']])
         out = """+-----+---+
