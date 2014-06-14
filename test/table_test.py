@@ -15,6 +15,10 @@ class TableTest(unittest.TestCase):
         t = Table([[1, 2, 3], [4, 5, 6]])
         self.assertEqual(t.columns(), [['1', '4'], ['2', '5'], ['3', '6']])
 
+    def test_column_length(self):
+        t = Table([['one', '1'], ['three', '2', '3']])
+        self.assertEqual(t.column_length(1), 5)
+
     def test_render(self):
         t = Table([['one', '1'], ['two', '2']])
         out = """+-----+---+
