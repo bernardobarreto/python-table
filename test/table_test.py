@@ -106,6 +106,12 @@ class CellTest(unittest.TestCase):
         cell = Cell(value='v', index=0, table=table)
         self.assertEqual(cell.alignment, 'left')
 
+    def test_should_allow_overriding_of_alignment(self):
+        table = Table([['a']])
+        cell = Cell(value='v', index=0, table=table)
+        cell.alignment = 'center'
+        self.assertEqual(cell.alignment, 'center')
+
     def test_only_accepts_some_options_for_alignment(self):
         table = Table([['a']])
         cell = Cell(value='v', index=0, table=table)
